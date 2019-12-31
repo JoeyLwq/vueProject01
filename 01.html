@@ -2,11 +2,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+        [v-clock]{
+            display:none;
+            }
+    </style>
 </head>
 <body>
 
-<div id="app">
-    {{message}}
+<!--v-clock属性会在vue解析后自动消失-->
+<div id="app" v-clock>
+
+    <!--通过对象赋值class，可以在data中控制样式的有无-->
+    <h2 :class="getClass()" :style="{fontSize: fontSize}">
+
+        <!--使用计算属性computed,本质是调用了get方法,因此不用加()
+            且computed有缓存功能，多次调用时只会执行一次，而用methods则每次都会执行-->
+        {{nameChange}}
+    </h2>
+
+    <!--v-html标签-->
+    <h2 v-html="url"></h2>
+
+
 </div>
 
 
@@ -16,7 +35,21 @@
     const app = new Vue({
         el: '#app',
         data: {
-            message: 'hello'
+            message: 'hello',
+            url: '<a href="http://www.baidu.com">baidu</a>',
+            isTitle: true,
+            isActive: true,
+            fontSize: '20px',
+        },
+        computed: {
+            nameChange(){
+                return this.message + ' changed'
+            },
+        },
+        methods: {
+            getClass(){
+                return {title: this.isTitle, active: this.isActive}
+            }
         }
     })
     
