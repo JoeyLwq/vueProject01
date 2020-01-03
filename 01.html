@@ -15,17 +15,31 @@
 <div id="app" v-clock>
 
     <!--通过对象赋值class，可以在data中控制样式的有无-->
+    <!--当方法没有参数时，括号可以省略；当方法有参数，但没有写括号，则默认会把浏览器event对象传入；使用$event可以手动传入event对象
+        以上是针对@绑定的方法，而如下用:来绑定的方法是必须有括号的-->
     <h2 :class="getClass()" :style="{fontSize: fontSize}">
 
         <!--使用计算属性computed,本质是调用了get方法,因此不用加()
             且computed有缓存功能，多次调用时只会执行一次，而用methods则每次都会执行-->
-        {{nameChange}}
+        <!--后面是过滤器，管道符前的变量将作为参数传入过滤器-->
+        {{nameChange | showFilters}}
     </h2>
 
     <!--v-html标签-->
     <h2 v-html="url"></h2>
 
+    <!--@的修饰符，如.stop可以阻止冒泡
+        .prevent则可以阻止标签的默认行为，如提交按钮
+        .once是只触发一次回调-->
+    <div @click.once="outClick">
+        out
+        <button @click.stop="inClick">inButton</button>
+    </div>
 
+    <!--在v-for中使用:key是为了提高插入元素操作的性能，它能将标签和其内容一一对应(注意不能用index,因为这样不能形成一一对应)-->
+    <div>
+        <h3 v-for="(item, index) in nameList" :key="item">{{index+1}}.{{item}}</h3>
+    </div>
 </div>
 
 
@@ -40,6 +54,7 @@
             isTitle: true,
             isActive: true,
             fontSize: '20px',
+            nameList: ["Lin", "Joey", "Tom"]
         },
         computed: {
             nameChange(){
@@ -49,6 +64,17 @@
         methods: {
             getClass(){
                 return {title: this.isTitle, active: this.isActive}
+            },
+            outClick(){
+                console.log("outPrint")
+            },
+            inClick(){
+                console.log("inPrint")
+            }
+        },
+        filters: {
+            showFilters(value){
+                return value + "这里有过滤器"
             }
         }
     })
