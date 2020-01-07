@@ -58,7 +58,8 @@
         },
         computed: {
             nameChange(){
-                return this.message + ' changed'
+                <!--函数式编程-->
+                return this.nameList.filter(i => i.length<=3).reduce((pre,i) => pre+i)
             },
         },
         methods: {

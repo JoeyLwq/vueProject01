@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <!--html中要用-来替换大写字母-->
+    <cpn :in-data="outData" @out-click="outClick"></cpn>
+</div>
+
+
+
+<!--组件模板-->
+<template id="cpn">
+    <div>
+        <h3>{{inData}}</h3>
+        <button v-for="item in list1" @click="inClick(item.age)">{{item.name}}</button>
+    </div>
+</template>
+
+
+<script src="./vue.js"></script>
+<script>
+
+    <!--组件对象-->
+    const cpn = {
+        template: '#cpn',
+        <!--也可以使用props: ['inData']-->
+        props: {
+            inData: {
+                type: String,
+                default: '',
+                required: false
+            },
+            inList: {
+                type: [Array,String],
+                <!--数组、对象的默认值必须是一个函数-->
+                default(){
+                    return []
+                }
+            }
+        },
+        data(){
+            return {
+                list1: [
+                    {name: 'Lin', age: '18'},
+                    {name: 'Wang', age: '22'}
+                ]
+            }
+        },
+        methods: {
+            inClick(value){
+                this.$emit('out-click',value)
+            }
+        }
+    }
+
+
+    <!--Vue对象-->
+    const app = new Vue({
+        el: '#app',
+        data: {
+            outData: 'outData',
+        },
+        components: {cpn},
+        methods: {
+            outClick(value){
+                console.log('父组件的方法被调用了,传出的对象为：',value)
+            }
+        }
+    })
+</script>
+</body>
+</html>
