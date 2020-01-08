@@ -9,16 +9,33 @@
 
 <div id="app">
     <!--html中要用-来替换大写字母-->
-    <cpn :in-data="outData" @out-click="outClick"></cpn>
+    <!--用ref后就可以使用this.$refs.childTemplate来调用该子组件对象-->
+    <cpn ref="childTemplate" :in-data="outData" @out-click="outClick">
+        <!--作用域插槽：使用slot-scope属性来调用子组件里的数据，实现在父组件中灵活决定子组件的数据将如何展示-->
+        <template slot="left" slot-scope="slot">
+            <textarea v-for="item in slot.data">{{item.name}}</textarea>
+        </template>
+        <button slot="right">往插槽里放一个按钮</button>
+    </cpn>
+    <button @click="buttonClick1">点我</button>
 </div>
 
 
 
 <!--组件模板-->
 <template id="cpn">
+    <!--模板里要有一个根元素-->
     <div>
         <h3>{{inData}}</h3>
         <button v-for="item in list1" @click="inClick(item.age)">{{item.name}}</button>
+        <input value="str1" v-model.lazy="str1">
+        <div>
+            这里开始是插槽
+            <slot name="left" :data="list1"><button>默认左按钮</button></slot>
+            |||
+            <slot name="right"><button>默认右按钮</button></slot>
+        </div>
+
     </div>
 </template>
 
@@ -49,15 +66,23 @@
                 list1: [
                     {name: 'Lin', age: '18'},
                     {name: 'Wang', age: '22'}
-                ]
+                ],
+                str1: "str1origin"
             }
         },
         methods: {
             inClick(value){
                 this.$emit('out-click',value)
             }
+        },
+        <!--监听指定属性值的变化-->
+        watch: {
+            str1(newValue, oldValue){
+                console.log("oldValue为:"+oldValue+",newValue为:"+newValue);
+            }
         }
     }
+
 
 
     <!--Vue对象-->
@@ -70,6 +95,9 @@
         methods: {
             outClick(value){
                 console.log('父组件的方法被调用了,传出的对象为：',value)
+            },
+            buttonClick1(){
+                console.log(this.$refs.childTemplate)
             }
         }
     })
