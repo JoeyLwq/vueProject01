@@ -13,7 +13,13 @@
                                 <template v-if="childColumn.filterConfig&&childColumn.filterConfig.type">
                                     <div :id="`${childColumn.filterConfig.type}_${childColumn.prop}`">
                                         <div>{{childColumn.label}}</div>
-                                        <filter/>
+                                        <filter
+                                            :type="childColumn.type"
+                                            :filtercolumn="childColumn.filterConfig.column"
+                                            :pname="childColumn.filterConfig.ftn"
+                                            :defaultFilters="defaultFilters"
+                                            @get-filters="getFilters"
+                                        />
                                     </div>
                                 </template>
                             </template>
@@ -28,7 +34,13 @@
                         <template v-if="column.filterConfig&&column.filterConfig.type">
                             <div :id="`${column.filterConfig.type}_${column.prop}`">
                                 <div>{{column.label}}</div>
-                                <filter/>
+                                <filter
+                                    :type="column.type"
+                                    :filtercolumn="column.filterConfig.column"
+                                    :pname="column.filterConfig.ftn"
+                                    :defaultFilters="defaultFilters"
+                                    @get-filters="getFilters"
+                                />
                             </div>
                         </template>
                     </template>
@@ -39,25 +51,29 @@
 </template>
 
 <script>
-    export default {
-        name: 'tableTest',
-        props: {
-            multiple:{
-                type:Boolean,
-                default:true
-            },
-            columns:{
-                type:Array,
-                default(){return []}
-            },
-            data{
-                type:Array,
-                default(){return []}
-            }
+import Filter from './filter/index.vue'
+
+export default {
+    name: 'tableTest',
+    props: {
+        multiple:{
+            type:Boolean,
+            default:true
         },
+        columns:{
+            type:Array,
+            default(){return []}
+        },
+        data{
+            type:Array,
+            default(){return []}
         }
-        data(){
-            return {}
-        }
+    },
+    components:{
+        Filter
     }
+    data(){
+        return {}
+    }
+}
 </script>

@@ -1,8 +1,28 @@
 <template>
-
+    <div>
+        <combox-filter
+            v-if="type=='combox'"
+            v-model="currentValue"
+            :pname="pname"
+            :filtercolumn="filtercolumn"
+            :multiple="multiple"
+            :defaultFilters="defaultFilters"
+            @change="change"
+        />
+        <date-filter
+            v-if="type=='date'"
+            v-model="currentValue"
+            :pname="pname"
+            :filtercolumn="filtercolumn"
+            :defaultFilters="defaultFilters"
+            @change="change"
+        />
+    </div>
 </template>
 
 <script>
+import dateFilter    from './filters/date.vue'
+import comboxFilter  from './filters/combox.vue'
 
 export default {
     props{
@@ -29,8 +49,19 @@ export default {
         }
     },
     components:{
-
+        dateFilter,comboxFilter
+    },
+    data(){
+        return {
+            currentValue: this.value,
+        }
+    },
+    methods:{
+        change(value){
+            this.$emit('getFilters',value)
+        }
     }
+}
 
 
 

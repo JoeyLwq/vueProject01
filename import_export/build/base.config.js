@@ -6,8 +6,9 @@ const UglifyPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
     entry: './src/main.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: 'bundle.js',
+        /*使用插件后不再需要publicPath*/
 //        publicPath: 'dist/'
     },
     module: {
@@ -52,11 +53,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'index.html'
         }),
-        new UglifyPlugin()
-    ],
-    devServer: {
-        contentBase: './dist',
-        /*是否热更新*/
-        inline: true
-    }
+    ]
 }
