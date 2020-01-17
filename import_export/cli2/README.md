@@ -1,4 +1,4 @@
-# vueclitest
+# cli2
 
 > A Vue.js project
 
