@@ -31,6 +31,7 @@
         <input value="str1" v-model.lazy="str1">
         <div>
             这里开始是插槽
+            <!--整个插槽标签会被外部传入的内容替换，因此要给插槽加样式最好在其外面再包一层标签，如div等，在div内加样式-->
             <slot name="left" :data="list1"><button>默认左按钮</button></slot>
             |||
             <slot name="right"><button>默认右按钮</button></slot>
