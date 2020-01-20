@@ -8,6 +8,7 @@ const User = () => import('@/components/User')
 const News = () => import('@/components/HomeChildren/News')
 const Message = () => import('@/components/HomeChildren/Message')
 const QueryTest = () => import('@/components/QueryTest')
+const TestPromise = () => import('@/components/TestPromise')
 
 /*安装插件*/
 Vue.use(Router)
@@ -71,6 +72,10 @@ const router = new Router({
       meta:{
         title: '测试query'
       }
+    },
+    {
+      path: '/testPromise',
+      component: TestPromise
     }
   ],
 

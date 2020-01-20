@@ -56,7 +56,11 @@ export default {
     methods:{
         handleFocus(){
         },
-        change(){
+        change(value){
+            let data={
+
+            }
+            this.$emit("change", data)
         }
     }
 }

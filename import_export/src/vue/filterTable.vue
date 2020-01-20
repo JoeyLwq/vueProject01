@@ -1,6 +1,6 @@
 <template>
     <el-table
-        :data="tableData"
+        :data="data"
         style="width: 100%"
         height="250">
         <el-table-column fixed="left" type="selection" width="35" v-if="multiple&&columns.length>0"></el-table-column>
@@ -71,9 +71,15 @@ export default {
     },
     components:{
         Filter
-    }
+    },
     data(){
         return {}
+    },
+    methods: {
+        getFilters(value){
+            this.$emit('update')
+        }
     }
+
 }
 </script>
