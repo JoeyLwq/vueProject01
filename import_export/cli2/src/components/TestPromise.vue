@@ -96,7 +96,7 @@ export default{
     //this.testPromiseSyntax01()
     //this.testPromiseSyntax02()
     //this.testSync()
-    this.testPromiseAll()
+    //this.testPromiseAll()
   }
 
 }

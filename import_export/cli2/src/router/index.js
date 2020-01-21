@@ -9,6 +9,7 @@ const News = () => import('@/components/HomeChildren/News')
 const Message = () => import('@/components/HomeChildren/Message')
 const QueryTest = () => import('@/components/QueryTest')
 const TestPromise = () => import('@/components/TestPromise')
+const TestVuex = () => import('@/components/TestVuex/TestVuex')
 
 /*安装插件*/
 Vue.use(Router)
@@ -75,7 +76,17 @@ const router = new Router({
     },
     {
       path: '/testPromise',
-      component: TestPromise
+      component: TestPromise,
+      meta: {
+        title: '测试Promise'
+      }
+    },
+    {
+      path: '/testVuex',
+      component: TestVuex,
+      meta: {
+        title: '测试vuex'
+      }
     }
   ],
 

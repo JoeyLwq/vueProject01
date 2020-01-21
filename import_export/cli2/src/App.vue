@@ -9,6 +9,7 @@
       <router-link to="/user/lisi" tag="button">测试动态绑定</router-link>
       <router-link to="/testPromise" tag="button">测试Promise</router-link>
       <router-link :to="{path: '/querytest', query: {name: 'Lin',age: 18}}" tag="button">测试query</router-link>
+      <router-link to="/testVuex" tag="button">测试vuex</router-link>
     </div>
     <keep-alive>
       <router-view/>
