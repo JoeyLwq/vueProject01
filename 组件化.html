@@ -21,7 +21,6 @@
 </div>
 
 
-
 <!--组件模板-->
 <template id="cpn">
     <!--模板里要有一个根元素-->
@@ -32,9 +31,13 @@
         <div>
             这里开始是插槽
             <!--整个插槽标签会被外部传入的内容替换，因此要给插槽加样式最好在其外面再包一层标签，如div等，在div内加样式-->
-            <slot name="left" :data="list1"><button>默认左按钮</button></slot>
+            <slot name="left" :data="list1">
+                <button>默认左按钮</button>
+            </slot>
             |||
-            <slot name="right"><button>默认右按钮</button></slot>
+            <slot name="right">
+                <button>默认右按钮</button>
+            </slot>
         </div>
 
     </div>
@@ -44,7 +47,7 @@
 <script src="./vue.js"></script>
 <script>
 
-    <!--组件对象-->
+    // 组件对象
     const cpn = {
         template: '#cpn',
         <!--也可以使用props: ['inData']-->
@@ -55,14 +58,14 @@
                 required: false
             },
             inList: {
-                type: [Array,String],
+                type: [Array, String],
                 <!--数组、对象的默认值必须是一个函数-->
-                default(){
+                default() {
                     return []
                 }
             }
         },
-        data(){
+        data() {
             return {
                 list1: [
                     {name: 'Lin', age: '18'},
@@ -72,32 +75,30 @@
             }
         },
         methods: {
-            inClick(value){
-                this.$emit('out-click',value)
+            inClick(value) {
+                this.$emit('out-click', value)
             }
         },
         <!--监听指定属性值的变化-->
         watch: {
-            str1(newValue, oldValue){
-                console.log("oldValue为:"+oldValue+",newValue为:"+newValue);
+            str1(newValue, oldValue) {
+                console.log("oldValue为:" + oldValue + ",newValue为:" + newValue);
             }
         }
     }
-
-
 
     <!--Vue对象-->
     const app = new Vue({
         el: '#app',
         data: {
-            outData: 'outData',
+            outData: 'outData'
         },
         components: {cpn},
         methods: {
-            outClick(value){
-                console.log('父组件的方法被调用了,传出的对象为：',value)
+            outClick(value) {
+                console.log('父组件的方法被调用了,传出的对象为：', value)
             },
-            buttonClick1(){
+            buttonClick1() {
                 console.log(this.$refs.childTemplate)
             }
         }

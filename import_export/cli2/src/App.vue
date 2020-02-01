@@ -10,6 +10,7 @@
       <router-link to="/testPromise" tag="button">测试Promise</router-link>
       <router-link :to="{path: '/querytest', query: {name: 'Lin',age: 18}}" tag="button">测试query</router-link>
       <router-link to="/testVuex" tag="button">测试vuex</router-link>
+      <router-link to="/testAxios" tag="button">测试axios</router-link>
     </div>
     <keep-alive>
       <router-view/>

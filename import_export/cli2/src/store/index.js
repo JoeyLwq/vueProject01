@@ -1,36 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {moduleA} from "./modules/moduleA";
+import getters from './getters'
+import actions from './actions'
+import mutations from './mutations'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
 
 const store = new Vuex.Store({
   state: {
-    counter: 10
-  },
-  mutations: {
-    incre(state){
-      state.counter++
-    },
-    decre(state){
-      state.counter--
+    counter: 10,
+    dist: {
+      'one':'this is one'
     }
   },
-  actions: {
-
-  },
-  getters: {
-    getter01(state, getters){
-      return state.counter + '经过了geter01'
-    },
-    getter02(state, getters){
-      return function(sth) {
-        return sth + ' 经过了getter02'
-      }
-    }
-  },
+  mutations,
+  actions,
+  getters,
   modules: {
-
+    a: moduleA
   }
-})
+});
 
 export default store
